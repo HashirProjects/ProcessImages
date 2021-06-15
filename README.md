@@ -1,2 +1,1 @@
-# ProcessImages
-Converts images from a directory into a numpy array and resizes them, then saves the processed data. 
+Converts images from a directory into an array, resizes them, and/or saves and loads the processed data. 

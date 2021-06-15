@@ -4,17 +4,16 @@ import pickle
 
 class processImgs():
 
-	def __init__(self, colorCode , directory):
-		self.colorCode = colorCode
+	def __init__(self, directory):
 		self.directory = directory
 
-	def Fetch(self):
+	def Fetch(self, colorCode):
 
 		self.processedImgs = []
 
 		for img in os.listdir(self.directory):
 
-			imgArrayForm = cv2.imread(os.path.join(self.directory,img),self.colorCode)
+			imgArrayForm = cv2.imread(os.path.join(self.directory,img),colorCode)
 			self.processedImgs.append(imgArrayForm)
 
 	def Resize(self, resolution):
@@ -28,7 +27,7 @@ class processImgs():
 			except Exception as e:
 
 				raise e
-				print ("One of your images was invalid")
+				print (f"image number {self.processedImgs.index(img)} was invalid")
 
 	def Save(self):
 
@@ -43,12 +42,18 @@ class processImgs():
 #shortcuts
 
 def SaveAsArray(colorCode =1, directory):
-	imgProcessor=processImgs(colorCode, directory)
-	imgProcessor.Fetch()
+
+	imgProcessor=processImgs(directory)
+	imgProcessor.Fetch(colorCode)
 	imgProcessor.Save()
 
 def ResizeAndSaveAsArray(resolution = (100,100), colorCode =1, directory):
-	imgProcessor=processImgs(colorCode, directory)
-	imgProcessor.Fetch()
+
+	imgProcessor=processImgs(directory)
+	imgProcessor.Fetch(colorCode)
 	imgProcessor.Resize(resolution)
 	imgProcessor.Save()
+
+def Load(directory):
+
+	return processImgs(directory).Load().processedImgs
