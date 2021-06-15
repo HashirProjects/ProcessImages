@@ -54,6 +54,8 @@ def ResizeAndSaveAsArray(resolution = (100,100), colorCode =1, directory):
 	imgProcessor.Resize(resolution)
 	imgProcessor.Save()
 
-def Load(directory):
+def LoadArray(directory):
 
-	return processImgs(directory).Load().processedImgs
+	imgProcessor=processImgs(directory)
+	imgProcessor.Load()
+	return imgProcessor.processedImgs
